@@ -1,9 +1,9 @@
 class Rover
 
   def initialize(x_coordinate, y_coordinate, direction)
-    @x_coordinate = 0
-    @y_coordinate = 0
-    @direction = 0
+    @x_coordinate = x_coordinate
+    @y_coordinate = y_coordinate
+    @direction = direction
   end
 
   def read_instruction(x, y, direction)
@@ -49,4 +49,11 @@ class Rover
       @direction = "W"
     end
   end
+
+  def output
+    "#{@x_coordinate}, #{@y_coordinate}, #{@direction}"
+  end
 end
+
+rover = Rover.new(1, 2, "N")
+puts rover.output
