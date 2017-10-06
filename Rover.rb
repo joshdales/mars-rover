@@ -49,7 +49,7 @@ class Rover
     if direction == "L"
       @counter -= 1
     elsif direction == "R"
-      @coutner += 1
+      @counter += 1
     end
 
     if @counter == 0
@@ -70,7 +70,13 @@ class Rover
   end
 end
 
-rover = Rover.new(1, 2, "N")
+rover = Rover.new(0, 0, "N")
 puts rover.output
+
+rover.input(1, 2, "N")
 rover.read_instruction("LMLMLMLMM")
-puts rover.output
+puts rover.output   # Expected Output: 1 3 N
+
+rover.input(3, 3, "E")
+rover.read_instruction("MMRMMRMRRM")
+puts rover.output   # Expected Output: 5 1 E
