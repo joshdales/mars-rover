@@ -5,13 +5,33 @@ class Rover
     @y_coordinate = y_coordinate
     @direction = direction
 
-    @counter = 0
+    if @direction == "N"
+      @counter = 0
+    elsif @direction == "E"
+      @counter = 1
+    elsif @direction == "S"
+      @counter = 2
+    else @direction == "W"
+      @counter = 3
+    end
+
+
   end
 
-  def input(x_coordinate, y_coordinate, start_direction)
+  def reset(x_coordinate, y_coordinate, start_direction)
     @x_coordinate = x_coordinate
     @y_coordinate = y_coordinate
     @direction = start_direction
+
+    if @direction == "N"
+      @counter = 0
+    elsif @direction == "E"
+      @counter = 1
+    elsif @direction == "S"
+      @counter = 2
+    else @direction == "W"
+      @counter = 3
+    end
   end
 
   def read_instruction(instructions)
@@ -40,16 +60,17 @@ class Rover
   end
 
   def turn(direction)
-    if @counter > 4
-      @counter = 0
-    elsif @counter < 0
-      @counter = 4
-    end
 
     if direction == "L"
       @counter -= 1
     elsif direction == "R"
       @counter += 1
+    end
+
+    if @counter > 3
+      @counter = 0
+    elsif @counter < 0
+      @counter = 3
     end
 
     if @counter == 0
@@ -73,10 +94,14 @@ end
 rover = Rover.new(0, 0, "N")
 puts rover.output
 
-rover.input(1, 2, "N")
+rover.reset(1, 1, "N")
+rover.read_instruction("L")
+puts rover.output
+
+rover.reset(1, 2, "N")
 rover.read_instruction("LMLMLMLMM")
 puts rover.output   # Expected Output: 1 3 N
 
-rover.input(3, 3, "E")
+rover.reset(3, 3, "E")
 rover.read_instruction("MMRMMRMRRM")
 puts rover.output   # Expected Output: 5 1 E
